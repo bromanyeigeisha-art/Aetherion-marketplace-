@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aetherion Store</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#030816;
+color:white;
+overflow-x:hidden;
+transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* KODE ANIMASI TRANSISI KELUAR */
+.page-transition-out {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+/* INTRO */
+
+#intro{
+position:fixed;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:#030816;
+z-index:1000;
+transition:1s;
+}
+
+.title{
+font-size:60px;
+font-weight:bold;
+color:white;
+text-shadow:0 0 20px white;
+transition:1s;
+}
+
+.store{
+font-size:28px;
+color:#00aaff;
+opacity:0;
+transition:1s;
+}
+
+.orbit{
+position:absolute;
+width:220px;
+height:220px;
+animation:spin 3s linear infinite;
+}
+
+.star{
+position:absolute;
+top:-10px;
+left:50%;
+transform:translateX(-50%);
+color:#00aaff;
+font-size:22px;
+}
+
+@keyframes spin{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+/* NAVBAR */
+
+.navbar{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:15px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,.3);
+backdrop-filter:blur(10px);
+opacity:0;
+transition:1s;
+z-index:999;
+}
+
+.brand{
+color:#00aaff;
+font-size:22px;
+font-weight:bold;
+}
+
+/* MENU */
+
+.menu-btn{
+width:35px;
+cursor:pointer;
+}
+
+.menu-btn span{
+display:block;
+height:3px;
+background:white;
+margin:6px 0;
+border-radius:10px;
+transition:.4s;
+}
+
+.menu-btn.active span:nth-child(1){
+transform:rotate(45deg) translate(6px,6px);
+}
+
+.menu-btn.active span:nth-child(2){
+opacity:0;
+}
+
+.menu-btn.active span:nth-child(3){
+transform:rotate(-45deg) translate(7px,-7px);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+position:fixed;
+right:-280px;
+top:0;
+width:280px;
+height:100%;
+background:#081222;
+transition:.5s;
+padding-top:80px;
+z-index:998;
+}
+
+.sidebar.active{
+right:0;
+}
+
+.sidebar a{
+display:block;
+padding:18px 25px;
+color:white;
+text-decoration:none;
+border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+/* ABOUT */
+
+.about{
+padding:100px 25px 40px;
+max-width:900px;
+margin:auto;
+}
+
+.divider{
+height:2px;
+background:#00aaff;
+margin:20px 0;
+box-shadow:0 0 10px #00aaff;
+}
+
+.about h2{
+color:#00aaff;
+margin-bottom:20px;
+}
+
+.about p{
+line-height:1.8;
+color:#dfe8ff;
+}
+
+</style>
+</head>
+<body>
+
+<div id="intro">
+
+<div class="orbit" id="orbit">
+<div class="star">✦</div>
+</div>
+
+<div class="title" id="title">
+AETHERION
+</div>
+
+<div class="store" id="store">
+STORE
+</div>
+
+</div>
+
+<div class="navbar" id="navbar">
+
+<div class="brand">
+AETHERION.STORE
+</div>
+
+<div class="menu-btn" id="menuBtn">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+</div>
+
+<section class="about">
+
+<div class="divider"></div>
+
+<h2>Tentang Aetherion</h2>
+
+<p>
+Aetherion adalah platform digital yang menyediakan layanan jual beli akun game, top up berbagai game, nomor virtual (Nokos), serta berbagai kebutuhan digital lainnya.
+
+<br><br>
+
+Kami berkomitmen untuk membangun ekosistem transaksi yang aman, transparan, dan terpercaya bagi seluruh pengguna.
+
+<br><br>
+
+Kepercayaan pengguna merupakan prioritas utama dalam setiap pengembangan layanan yang kami lakukan.
+</p>
+
+<div class="divider"></div>
+
+</section>
+
+<div class="sidebar" id="sidebar">
+
+<a href="jual-akun.html" id="link-jual-akun">🛒 Jual Akun games</a>
+<a href="#">💎 Top Up Games</a>
+<a href="#">📱 Nokos</a>
+
+</div>
+
+<script>
+
+const intro = document.getElementById("intro");
+const title = document.getElementById("title");
+const store = document.getElementById("store");
+const orbit = document.getElementById("orbit");
+
+const navbar = document.getElementById("navbar");
+const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.getElementById("sidebar");
+
+setTimeout(()=>{
+
+orbit.style.opacity="0";
+
+title.style.color="#00aaff";
+title.style.textShadow="0 0 20px #00aaff";
+
+store.style.opacity="1";
+
+},3000);
+
+setTimeout(()=>{
+
+intro.style.opacity="0";
+
+navbar.style.opacity="1";
+
+setTimeout(()=>{
+intro.style.display="none";
+},1000);
+
+},5000);
+
+menuBtn.addEventListener("click",()=>{
+
+menuBtn.classList.toggle("active");
+sidebar.classList.toggle("active");
+
+});
+
+
+/* 2. SCRIPT BARU UNTUK ANIMASI TRANSISI SAAT DIKLIK */
+const tombolJualAkun = document.getElementById('link-jual-akun');
+
+tombolJualAkun.addEventListener('click', function(event) {
+    event.preventDefault(); // Tahan pemindahan instan
+    const targetUrl = this.href; 
+
+    // Tambahkan class efek memudar ke body
+    document.body.classList.add('page-transition-out');
+
+    // Tunggu animasi fade-out selesai selama 0.5 detik (500ms) lalu pindah halaman
+    setTimeout(() => {
+        window.location.href = targetUrl;
+    }, 500);
+});
+
+</script>
+
+</body>
+</html>
